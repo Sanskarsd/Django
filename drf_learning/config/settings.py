@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "apiapp",
     "rest_framework",
     "genericapi",
+    "viewsetapi",
 ]
 
 MIDDLEWARE = [
