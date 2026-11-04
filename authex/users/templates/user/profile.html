@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Home</title>
+  </head>
+  <body bgcolor="#363131" text="white">
+    <h2>Home Page</h2>
+
+    <p>Welcome, {{ request.user.username }}!</p>
+    <p>You are logged in.</p>
+
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+    <form methor="post" action="{% url "change_password" %}">
+       {% csrf_token %}
+      <button type="submit"> Change Password </button>
+    </form>
+    <form method="post" action="{% url "password_reset" %}">
+       {% csrf_token %}
+      <button type="submit" > Reset password </butthon> </form>
+  </body>
+</html>

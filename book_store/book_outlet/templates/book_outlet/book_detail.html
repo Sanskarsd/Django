@@ -1,0 +1,31 @@
+{% load static %}
+<html>
+
+    <head>
+        <title>{{ book.slug }}</title>
+         <link rel="stylesheet" href="{% static 'book_outlet/style.css' %}">
+    </head>
+
+    <body>
+
+        <h1>Title: {{ book.title }}</h1>
+
+        <h4>Author: {{ book.author }}</h4>
+
+        <p>Rating: {{ book.rating }}</p>
+
+        <p><b>Price: ${{ book.price }}</b></p>
+
+        <p>
+            Book {{ book.title }} is
+
+            {% if book.is_bestselling %}
+                a bestseller
+            {% else %}
+                not a bestseller
+            {% endif %}.
+
+        </p>
+
+    </body>
+</html>

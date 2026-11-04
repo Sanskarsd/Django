@@ -1,0 +1,15 @@
+{% load static %}
+<html>
+    <head>
+        <title>Book Outlet</title> 
+         <link rel="stylesheet" href="{% static 'book_outlet/style.css' %}"> 
+    </head>
+    <body>
+        <h1>Book Outlet</h1>
+        <h3>Click Book to see details</h3>
+        {% for book in books %}
+        <a href="{% url 'book_detail' book.slug %}">{{ book.title }}</a><br>
+        {% endfor %}
+
+    </body>
+</html>

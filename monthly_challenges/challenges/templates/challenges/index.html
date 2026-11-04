@@ -1,0 +1,514 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_styles %}
+<link rel="stylesheet" href="{% static 'challenges/challenges.css' %}">
+{% endblock %}
+
+{% block page_title %}Monthly Challenges{% endblock %}
+
+{% block content %}
+
+<div class="journey-page">
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header class="journey-nav">
+
+        <a href="/" class="brand">
+            <span class="brand-orbit"></span>
+
+            <span class="brand-text">
+                MONTHLY
+                <strong>CHALLENGES</strong>
+            </span>
+        </a>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            JOURNEY ACTIVE
+        </div>
+
+        <div class="nav-counter">
+            <span id="currentNumber">01</span>
+            /
+            <span id="totalNumber">12</span>
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN JOURNEY ================= -->
+
+    <main class="journey">
+
+        <!-- LEFT MONTH PROGRESS -->
+
+        <aside class="month-rail">
+
+            <div class="rail-line"></div>
+            <div class="rail-progress"></div>
+
+            {% for month in months %}
+
+            <a
+                href="{% url 'month-challenge' month %}"
+                class="rail-month {% if forloop.first %}active{% endif %}"
+                data-index="{{ forloop.counter0 }}"
+            >
+                <span class="rail-number">
+                    {{ forloop.counter|stringformat:"02d" }}
+                </span>
+
+                <span class="rail-name">
+                    {{ month|title }}
+                </span>
+
+                <span class="rail-dot"></span>
+            </a>
+
+            {% endfor %}
+
+        </aside>
+
+
+        <!-- ================= MONTH EXPERIENCE ================= -->
+
+        <section class="month-stage">
+
+            <div class="background-grid"></div>
+
+            <div class="ambient ambient-one"></div>
+            <div class="ambient ambient-two"></div>
+
+
+            <!-- ================= ROBOT ================= -->
+
+            <div class="robot-area">
+
+                <div class="robot-shadow"></div>
+
+                <div class="robot">
+
+                    <!-- antenna -->
+
+                    <div class="robot-antenna">
+                        <span></span>
+                    </div>
+
+
+                    <!-- HEAD -->
+
+                    <div class="robot-head">
+
+                        <div class="robot-ear left-ear"></div>
+                        <div class="robot-ear right-ear"></div>
+
+                        <div class="robot-face">
+
+                            <div class="robot-eyes">
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <div class="robot-mouth">
+                                <span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BODY -->
+
+                    <div class="robot-body">
+
+                        <div class="robot-chest">
+
+                            <div class="chest-core">
+                                <span></span>
+                            </div>
+
+                            <div class="chest-lines"></div>
+
+                        </div>
+
+
+                        <!-- THINKING ARM -->
+
+                        <div class="robot-arm robot-arm-thinking">
+
+                            <div class="upper-arm"></div>
+                            <div class="elbow"></div>
+                            <div class="forearm"></div>
+
+                            <div class="robot-hand">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- INTERACTION ARM -->
+
+                        <div class="robot-arm robot-arm-action">
+
+                            <div class="upper-arm"></div>
+                            <div class="elbow"></div>
+                            <div class="forearm"></div>
+
+                            <div class="robot-hand">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SITTING LEGS -->
+
+                        <div class="robot-leg robot-leg-left">
+
+                            <div class="thigh"></div>
+                            <div class="knee"></div>
+                            <div class="shin"></div>
+                            <div class="robot-foot"></div>
+
+                        </div>
+
+
+                        <div class="robot-leg robot-leg-right">
+
+                            <div class="thigh"></div>
+                            <div class="knee"></div>
+                            <div class="shin"></div>
+                            <div class="robot-foot"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FLOOR -->
+
+                <div class="robot-floor">
+
+                    <div class="floor-glow"></div>
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= MONTH INFORMATION ================= -->
+
+            <div class="month-information">
+
+                <div class="mission-label">
+
+                    <span class="mission-line"></span>
+
+                    <span>CURRENT DESTINATION</span>
+
+                </div>
+
+
+                <div class="year-label">
+                    MONTHLY CHALLENGE 2026
+                </div>
+
+
+                <div class="month-display">
+
+                    {% for month in months %}
+
+                    <article
+                        class="month-card {% if forloop.first %}active{% endif %}"
+                        data-month="{{ month }}"
+                        data-index="{{ forloop.counter0 }}"
+                    >
+
+                        <div class="month-number">
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </div>
+
+                        <h1>
+                            {{ month|title }}
+                        </h1>
+
+                        <div class="challenge-word">
+                            CHALLENGE
+                        </div>
+
+
+                        <div class="mission-box">
+
+                            <span class="mission-icon">✦</span>
+
+                            <div>
+                                <small>MISSION</small>
+
+                                <p>
+                                    Discover your next challenge.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="{% url 'month-challenge' month %}"
+                            class="enter-button"
+                        >
+
+                            <span>ENTER CHALLENGE</span>
+
+                            <span class="button-arrow">↗</span>
+
+                        </a>
+
+                    </article>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- ================= NEXT INDICATOR ================= -->
+
+                <div class="scroll-indicator">
+
+                    <div class="scroll-mouse">
+                        <span></span>
+                    </div>
+
+                    <span>
+                        SCROLL TO CONTINUE
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= JOURNEY OBJECTS ================= -->
+
+            <div class="floating-object object-one">
+                +
+            </div>
+
+            <div class="floating-object object-two">
+                ◇
+            </div>
+
+            <div class="floating-object object-three">
+                ·
+            </div>
+
+
+            <!-- ================= MISSION MESSAGE ================= -->
+
+            <div class="robot-message">
+
+                <span class="message-dot"></span>
+
+                <span id="robotMessage">
+                    ANALYZING JANUARY...
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= HIDDEN SCROLL SECTIONS ================= -->
+
+    <div class="month-scroll-container">
+
+        {% for month in months %}
+
+        <section
+            class="month-scroll-section"
+            data-index="{{ forloop.counter0 }}"
+        >
+
+            <div></div>
+
+        </section>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const months = document.querySelectorAll(".month-card");
+    const railMonths = document.querySelectorAll(".rail-month");
+    const sections = document.querySelectorAll(".month-scroll-section");
+
+    const currentNumber =
+        document.getElementById("currentNumber");
+
+    const robotMessage =
+        document.getElementById("robotMessage");
+
+    const railProgress =
+        document.querySelector(".rail-progress");
+
+
+    const messages = [
+        "ANALYZING JANUARY...",
+        "SCANNING FEBRUARY...",
+        "LOADING MARCH...",
+        "PREPARING APRIL...",
+        "PROCESSING MAY...",
+        "SCANNING JUNE...",
+        "CALIBRATING JULY...",
+        "EXPLORING AUGUST...",
+        "ENTERING SEPTEMBER...",
+        "APPROACHING OCTOBER...",
+        "FINALIZING NOVEMBER...",
+        "MISSION COMPLETE — DECEMBER"
+    ];
+
+
+    function activateMonth(index) {
+
+        months.forEach((month, i) => {
+
+            month.classList.toggle(
+                "active",
+                i === index
+            );
+
+        });
+
+
+        railMonths.forEach((month, i) => {
+
+            month.classList.toggle(
+                "active",
+                i === index
+            );
+
+        });
+
+
+        currentNumber.textContent =
+            String(index + 1).padStart(2, "0");
+
+
+        robotMessage.textContent =
+            messages[index];
+
+
+        const progress =
+            index / (months.length - 1);
+
+        railProgress.style.height =
+            `${progress * 100}%`;
+
+
+        document.documentElement.style
+            .setProperty(
+                "--journey-progress",
+                progress
+            );
+
+
+        if (index === months.length - 1) {
+
+            document.querySelector(".robot")
+                .classList.add("celebrate");
+
+        } else {
+
+            document.querySelector(".robot")
+                .classList.remove("celebrate");
+
+        }
+
+    }
+
+
+    const observer =
+        new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        const index =
+                            Number(
+                                entry.target.dataset.index
+                            );
+
+                        activateMonth(index);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.55
+            }
+
+        );
+
+
+    sections.forEach(section => {
+
+        observer.observe(section);
+
+    });
+
+
+    railMonths.forEach((rail, index) => {
+
+        rail.addEventListener(
+            "click",
+            function () {
+
+                sections[index]
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
+        );
+
+    });
+
+
+    activateMonth(0);
+
+});
+
+</script>
+
+{% endblock %}

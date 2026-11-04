@@ -1,0 +1,376 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_styles %}
+<link rel="stylesheet" href="{% static 'challenges/challenges.css' %}">
+{% endblock %}
+
+{% block page_title %}
+{{ month_name|title }} Challenge
+{% endblock %}
+
+
+{% block content %}
+
+<div class="challenge-page">
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header class="challenge-nav">
+
+        <a href="/" class="challenge-brand">
+
+            <span class="brand-orbit"></span>
+
+            <span>
+                MONTHLY
+                <strong>CHALLENGES</strong>
+            </span>
+
+        </a>
+
+
+        <div class="challenge-nav-center">
+
+            <span class="nav-dot"></span>
+
+            JOURNEY / ACTIVE
+
+        </div>
+
+
+        <a href="/" class="back-link">
+            ← ALL CHALLENGES
+        </a>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="challenge-main">
+
+
+        <!-- LEFT SIDE -->
+
+        <section class="challenge-content">
+
+
+            <div class="destination-label">
+
+                <span class="destination-line"></span>
+
+                CURRENT DESTINATION
+
+            </div>
+
+
+            <div class="challenge-number">
+                CH-01
+            </div>
+
+
+            <div class="challenge-year">
+                MONTHLY CHALLENGE 2026
+            </div>
+
+
+            <!-- ================= ACTUAL DJANGO CONTENT ================= -->
+
+            <div class="challenge-title-area">
+
+                <div class="month-index">
+                    DESTINATION
+                </div>
+
+                <h1>
+                    {{ month_name|title }}
+                </h1>
+
+                <div class="challenge-title">
+                    CHALLENGE
+                </div>
+
+            </div>
+
+
+            {% if text is not None %}
+
+            <!-- ================= VALID CHALLENGE ================= -->
+
+            <div class="mission-panel">
+
+                <div class="mission-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <span class="mission-label">
+                        YOUR MISSION
+                    </span>
+
+                    <p>
+                        {{ text }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="challenge-action">
+
+                <a
+                    href="/"
+                    class="return-button"
+                >
+                    ← RETURN TO JOURNEY
+                </a>
+
+            </div>
+
+
+            {% else %}
+
+            <!-- ================= CHALLENGE NOT FOUND ================= -->
+
+            <div class="mission-panel unavailable">
+
+                <div class="mission-icon">
+                    !
+                </div>
+
+                <div>
+
+                    <span class="mission-label">
+                        CHALLENGE NOT FOUND
+                    </span>
+
+                    <p>
+                        This destination does not exist
+                        in the current journey.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="challenge-action">
+
+                <a
+                    href="/"
+                    class="return-button"
+                >
+                    ← RETURN TO JOURNEY
+                </a>
+
+            </div>
+
+            {% endif %}
+
+
+        </section>
+
+
+        <!-- ================= ROBOT ================= -->
+
+        <section class="challenge-robot-area">
+
+
+            <div class="robot-status">
+
+                <span class="status-indicator"></span>
+
+                ROBOT CH-01 READY
+
+            </div>
+
+
+            <div class="robot-system-text">
+
+                <span>SCAN</span>
+
+                <strong>ACTIVE</strong>
+
+                <span>01 MISSION</span>
+
+            </div>
+
+
+            <!-- ROBOT -->
+
+            <div class="challenge-robot">
+
+
+                <!-- ANTENNA -->
+
+                <div class="c-antenna">
+                    <span></span>
+                </div>
+
+
+                <!-- HEAD -->
+
+                <div class="c-head">
+
+                    <div class="c-ear left"></div>
+                    <div class="c-ear right"></div>
+
+                    <div class="c-face">
+
+                        <div class="c-eyes">
+
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                        <div class="c-mouth"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BODY -->
+
+                <div class="c-body">
+
+                    <div class="c-core">
+
+                        <span></span>
+
+                    </div>
+
+
+                    <!-- THINKING ARM -->
+
+                    <div class="c-arm c-thinking">
+
+                        <div class="c-upper"></div>
+
+                        <div class="c-joint"></div>
+
+                        <div class="c-forearm"></div>
+
+                        <div class="c-hand">
+
+                            <i></i>
+                            <i></i>
+                            <i></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OTHER ARM -->
+
+                    <div class="c-arm c-other">
+
+                        <div class="c-upper"></div>
+
+                        <div class="c-joint"></div>
+
+                        <div class="c-forearm"></div>
+
+                        <div class="c-hand">
+
+                            <i></i>
+                            <i></i>
+                            <i></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LEGS -->
+
+                    <div class="c-leg c-leg-left">
+
+                        <div></div>
+                        <span></span>
+
+                    </div>
+
+
+                    <div class="c-leg c-leg-right">
+
+                        <div></div>
+                        <span></span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FLOOR -->
+
+            <div class="robot-ground">
+
+                <span></span>
+
+            </div>
+
+
+            <!-- ROBOT MESSAGE -->
+
+            <div class="robot-console">
+
+                <span></span>
+
+                {% if text is not None %}
+
+                TRANSMISSION RECEIVED
+
+                {% else %}
+
+                DESTINATION UNAVAILABLE
+
+                {% endif %}
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= BOTTOM ================= -->
+
+    <footer class="challenge-footer">
+
+        <div>
+
+            <span class="footer-line"></span>
+
+            CHECKPOINT REACHED
+
+        </div>
+
+
+        <a href="/">
+
+            KEEP GOING ↗
+
+        </a>
+
+        <span>
+            CONTINUE JOURNEY
+        </span>
+
+    </footer>
+
+
+</div>
+
+{% endblock %}

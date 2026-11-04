@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Review Detail</title>
+  </head>
+  <body>
+    <h1>Review Detail</h1>
+    <p><strong>Username:</strong> {{ review.username }}</p>
+    <p><strong>Rating:</strong> {{ review.ratings }}</p>
+    <p><strong>Review Text:</strong> {{ review.review_text }}</p>
+    <form action="/reviews/favourite" method="post">
+      {% csrf_token %} {% if is_favourite %}
+      <p>This is my favourite review</p>
+      {% else %}
+      <input type="hidden" name="review_id" value="{{ review.id }}" />
+      <button>Favourite</button>
+      {% endif %}
+    </form>
+  </body>
+</html>

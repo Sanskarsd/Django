@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login</title>
+  </head>
+  <body bgcolor="#363131" text="white">
+    <h2>Login</h2>
+
+    {% if messages %} {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %} {% endif %}
+
+    <form method="post">
+      {% csrf_token %} {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br />
+        {{ field }}<br />
+        {{ field.errors }} {% if field.help_text %} {{ field.help_text|safe }}
+        {% endif %}
+      </p>
+      {% endfor %} {{ form.non_field_errors }}
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p>
+      Don't have an account?
+      <a href="{% url 'register' %}">Register</a>
+    </p>
+  </body>
+</html>

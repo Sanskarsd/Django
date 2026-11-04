@@ -1,0 +1,3665 @@
+/* =========================================================
+   MONTHLY CHALLENGES
+   ROBOT JOURNEY EXPERIENCE
+   ========================================================= */
+
+:root {
+
+    --bg: #030711;
+    --bg-soft: #07101e;
+
+    --cyan: #52e5ff;
+    --cyan-soft: #1ca9c7;
+
+    --blue: #5878ff;
+
+    --white: #f3f7ff;
+    --muted: #7e8ba3;
+
+    --line: rgba(110, 225, 255, 0.15);
+
+    --journey-progress: 0;
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.journey-page {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 70% 40%,
+            rgba(45, 88, 255, 0.12),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(0, 217, 255, 0.08),
+            transparent 35%
+        ),
+
+        #030711;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.journey-nav {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 76px;
+
+    padding:
+        0 5vw;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    z-index: 100;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
+
+    background:
+        rgba(3, 7, 17, .55);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+
+/* BRAND */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: white;
+
+}
+
+
+.brand-orbit {
+
+    width: 27px;
+    height: 27px;
+
+    border:
+        1px solid var(--cyan);
+
+    border-radius: 50%;
+
+    position: relative;
+
+    transform: rotate(-25deg);
+
+}
+
+
+.brand-orbit::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    background: var(--cyan);
+
+    border-radius: 50%;
+
+    top: 9px;
+    right: 3px;
+
+    box-shadow:
+        0 0 12px var(--cyan);
+
+}
+
+
+.brand-text {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    line-height: 1.4;
+
+    opacity: .8;
+
+}
+
+
+.brand-text strong {
+
+    display: block;
+
+    color: white;
+
+}
+
+
+.nav-status {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #7c899f;
+
+}
+
+
+.status-dot {
+
+    display: inline-block;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #53ffb5;
+
+    margin-right: 7px;
+
+    box-shadow:
+        0 0 10px #53ffb5;
+
+}
+
+
+.nav-counter {
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    color: var(--muted);
+
+}
+
+
+#currentNumber {
+
+    color: var(--cyan);
+
+    font-size: 16px;
+
+}
+
+
+/* =========================================================
+   JOURNEY
+   ========================================================= */
+
+.journey {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+/* =========================================================
+   LEFT RAIL
+   ========================================================= */
+
+.month-rail {
+
+    position: fixed;
+
+    z-index: 50;
+
+    left: 35px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+.rail-line {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 10px;
+
+    bottom: 10px;
+
+    width: 1px;
+
+    background:
+        rgba(255,255,255,.12);
+
+}
+
+
+.rail-progress {
+
+    position: absolute;
+
+    left: 15px;
+
+    top: 10px;
+
+    width: 3px;
+
+    height: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--cyan),
+            var(--blue)
+        );
+
+    box-shadow:
+        0 0 12px var(--cyan);
+
+    transition:
+        height .8s cubic-bezier(.22,.61,.36,1);
+
+}
+
+
+.rail-month {
+
+    height: 27px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #566277;
+
+    text-decoration: none;
+
+    transition:
+        .5s ease;
+
+}
+
+
+.rail-number {
+
+    width: 34px;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    text-align: right;
+
+}
+
+
+.rail-name {
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+}
+
+
+.rail-dot {
+
+    position: absolute;
+
+    left: 12px;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #172234;
+
+    border:
+        1px solid #3d4b61;
+
+    transition:
+        .5s ease;
+
+}
+
+
+.rail-month.active {
+
+    color: white;
+
+    transform:
+        translateX(5px);
+
+}
+
+
+.rail-month.active .rail-dot {
+
+    background: var(--cyan);
+
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 0 0 5px rgba(82,229,255,.08),
+        0 0 18px var(--cyan);
+
+}
+
+
+/* =========================================================
+   MAIN STAGE
+   ========================================================= */
+
+.month-stage {
+
+    min-height: 100vh;
+
+    height: 100vh;
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+   ========================================================= */
+
+.background-grid {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .17;
+
+    background-image:
+
+        linear-gradient(
+            rgba(91,216,255,.08) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(91,216,255,.08) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        70px 70px;
+
+    mask-image:
+        radial-gradient(
+            ellipse at center,
+            black,
+            transparent 75%
+        );
+
+}
+
+
+/* =========================================================
+   AMBIENT LIGHT
+   ========================================================= */
+
+.ambient {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(80px);
+
+    pointer-events: none;
+
+}
+
+
+.ambient-one {
+
+    width: 400px;
+    height: 400px;
+
+    left: 20%;
+
+    top: 30%;
+
+    background:
+        rgba(20, 120, 255, .07);
+
+}
+
+
+.ambient-two {
+
+    width: 350px;
+    height: 350px;
+
+    right: 5%;
+
+    bottom: 5%;
+
+    background:
+        rgba(0, 240, 255, .05);
+
+}
+
+
+/* =========================================================
+   MONTH INFORMATION
+   ========================================================= */
+
+.month-information {
+
+    position: absolute;
+
+    left: 25%;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 500px;
+
+    z-index: 10;
+
+}
+
+
+.mission-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--cyan);
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.mission-line {
+
+    width: 28px;
+    height: 1px;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 10px var(--cyan);
+
+}
+
+
+.year-label {
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: #66738a;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* =========================================================
+   MONTH DISPLAY
+   ========================================================= */
+
+.month-display {
+
+    position: relative;
+
+    height: 430px;
+
+}
+
+
+.month-card {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(50px)
+        scale(.96);
+
+    transition:
+
+        opacity .65s ease,
+
+        transform .8s
+        cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.month-card.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+.month-number {
+
+    position: absolute;
+
+    right: 0;
+
+    top: -30px;
+
+    font-size: 120px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    color:
+        rgba(255,255,255,.025);
+
+    user-select: none;
+
+}
+
+
+.month-card h1 {
+
+    margin: 0;
+
+    font-size: clamp(
+        60px,
+        7vw,
+        100px
+    );
+
+    line-height: .9;
+
+    letter-spacing: -5px;
+
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #9eacc5
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+
+}
+
+
+.challenge-word {
+
+    margin-top: 10px;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    letter-spacing: 8px;
+
+    color: var(--cyan);
+
+}
+
+
+/* =========================================================
+   MISSION BOX
+   ========================================================= */
+
+.mission-box {
+
+    margin-top: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: 350px;
+
+    padding: 15px 18px;
+
+    border-left:
+        2px solid var(--cyan);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(82,229,255,.08),
+            transparent
+        );
+
+}
+
+
+.mission-icon {
+
+    color: var(--cyan);
+
+    font-size: 18px;
+
+}
+
+
+.mission-box small {
+
+    display: block;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color: #6c7990;
+
+}
+
+
+.mission-box p {
+
+    margin: 5px 0 0;
+
+    color: #c4cede;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   ENTER BUTTON
+   ========================================================= */
+
+.enter-button {
+
+    margin-top: 28px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 14px 18px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border:
+        1px solid rgba(82,229,255,.35);
+
+    background:
+        rgba(82,229,255,.04);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    transition:
+        .35s ease;
+
+}
+
+
+.enter-button:hover {
+
+    background:
+        rgba(82,229,255,.12);
+
+    border-color:
+        var(--cyan);
+
+    transform:
+        translateX(7px);
+
+    box-shadow:
+        0 0 25px rgba(82,229,255,.1);
+
+}
+
+
+.button-arrow {
+
+    color: var(--cyan);
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================================
+   ROBOT AREA
+   ========================================================= */
+
+.robot-area {
+
+    position: absolute;
+
+    right: 15%;
+
+    bottom: 12%;
+
+    width: 390px;
+
+    height: 430px;
+
+    z-index: 15;
+
+}
+
+
+/* =========================================================
+   ROBOT SHADOW
+   ========================================================= */
+
+.robot-shadow {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 55px;
+
+    width: 280px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,.7);
+
+    filter: blur(12px);
+
+}
+
+
+/* =========================================================
+   ROBOT
+   ========================================================= */
+
+.robot {
+
+    position: absolute;
+
+    width: 300px;
+
+    height: 380px;
+
+    left: 45px;
+
+    bottom: 40px;
+
+    animation:
+        robotBreath 4s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 15px 35px
+            rgba(0,0,0,.5)
+        );
+
+}
+
+
+/* =========================================================
+   ANTENNA
+   ========================================================= */
+
+.robot-antenna {
+
+    position: absolute;
+
+    top: -25px;
+
+    left: 137px;
+
+    width: 3px;
+
+    height: 27px;
+
+    background: #60738d;
+
+}
+
+
+.robot-antenna span {
+
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    top: -5px;
+    left: -3px;
+
+    border-radius: 50%;
+
+    background: var(--cyan);
+
+    box-shadow:
+        0 0 15px var(--cyan);
+
+    animation:
+        antennaPulse 1.8s infinite;
+
+}
+
+
+/* =========================================================
+   ROBOT HEAD
+   ========================================================= */
+
+.robot-head {
+
+    position: absolute;
+
+    width: 145px;
+
+    height: 110px;
+
+    left: 75px;
+
+    top: 10px;
+
+    border-radius:
+        35px 35px 42px 42px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #c8d3df,
+            #67788e
+        );
+
+    border:
+        3px solid #e2edf7;
+
+    box-shadow:
+        inset 0 -12px 20px rgba(0,0,0,.25),
+        0 0 30px rgba(82,229,255,.08);
+
+}
+
+
+/* ears */
+
+.robot-ear {
+
+    position: absolute;
+
+    width: 14px;
+    height: 40px;
+
+    top: 32px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            #77899e,
+            #455467
+        );
+
+}
+
+
+.left-ear {
+    left: -12px;
+}
+
+
+.right-ear {
+    right: -12px;
+}
+
+
+/* FACE */
+
+.robot-face {
+
+    position: absolute;
+
+    left: 16px;
+    right: 16px;
+
+    top: 18px;
+
+    bottom: 18px;
+
+    border-radius: 25px;
+
+    background:
+        #07101b;
+
+    border:
+        1px solid #43546a;
+
+}
+
+
+/* EYES */
+
+.robot-eyes {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    padding-top: 22px;
+
+}
+
+
+.robot-eyes span {
+
+    width: 17px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    background:
+        var(--cyan);
+
+    box-shadow:
+        0 0 12px var(--cyan);
+
+    animation:
+        eyeBlink 5s infinite;
+
+}
+
+
+/* MOUTH */
+
+.robot-mouth {
+
+    position: absolute;
+
+    bottom: 17px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 30px;
+    height: 4px;
+
+    background:
+        #536b82;
+
+    border-radius: 5px;
+
+}
+
+
+/* =========================================================
+   ROBOT BODY
+   ========================================================= */
+
+.robot-body {
+
+    position: absolute;
+
+    top: 112px;
+
+    left: 70px;
+
+    width: 165px;
+
+    height: 230px;
+
+}
+
+
+/* CHEST */
+
+.robot-chest {
+
+    position: absolute;
+
+    left: 27px;
+
+    top: 0;
+
+    width: 110px;
+
+    height: 120px;
+
+    border-radius:
+        30px 30px 25px 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #b9c7d6,
+            #5e7085
+        );
+
+    border:
+        3px solid #d9e6f1;
+
+}
+
+
+.chest-core {
+
+    position: absolute;
+
+    top: 30px;
+
+    left: 37px;
+
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    border:
+        3px solid var(--cyan);
+
+    box-shadow:
+        0 0 20px rgba(82,229,255,.3);
+
+}
+
+
+.chest-core span {
+
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
+    background: var(--cyan);
+
+    border-radius: 50%;
+
+    left: 9px;
+    top: 9px;
+
+    box-shadow:
+        0 0 15px var(--cyan);
+
+}
+
+
+/* =========================================================
+   ROBOT ARMS
+   ========================================================= */
+
+.robot-arm {
+
+    position: absolute;
+
+    width: 85px;
+
+    height: 150px;
+
+}
+
+
+/* THINKING ARM */
+
+.robot-arm-thinking {
+
+    left: -42px;
+
+    top: -5px;
+
+    transform:
+        rotate(25deg);
+
+}
+
+
+/* ACTION ARM */
+
+.robot-arm-action {
+
+    right: -55px;
+
+    top: 20px;
+
+    transform:
+        rotate(-30deg);
+
+}
+
+
+/* ARM PARTS */
+
+.upper-arm {
+
+    position: absolute;
+
+    width: 25px;
+    height: 65px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #718398,
+            #c1cfdb
+        );
+
+    border:
+        2px solid #d5e1eb;
+
+}
+
+
+.robot-arm-thinking
+.upper-arm {
+
+    transform:
+        rotate(20deg);
+
+}
+
+
+.robot-arm-action
+.upper-arm {
+
+    transform:
+        rotate(-20deg);
+
+}
+
+
+.elbow {
+
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 50%;
+
+    background:
+        #4c6075;
+
+    border:
+        3px solid #c5d4e0;
+
+    top: 57px;
+
+    left: 5px;
+
+}
+
+
+.forearm {
+
+    position: absolute;
+
+    width: 22px;
+    height: 62px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #607389,
+            #c1cfdb
+        );
+
+}
+
+
+.robot-arm-thinking
+.forearm {
+
+    top: 70px;
+
+    left: 10px;
+
+    transform:
+        rotate(-35deg);
+
+}
+
+
+.robot-arm-action
+.forearm {
+
+    top: 68px;
+
+    left: 12px;
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+/* HAND */
+
+.robot-hand {
+
+    position: absolute;
+
+    width: 27px;
+    height: 28px;
+
+    border-radius:
+        10px 10px 13px 13px;
+
+    background:
+        #cbd8e4;
+
+}
+
+
+/* thinking hand goes toward mouth */
+
+.robot-arm-thinking
+.robot-hand {
+
+    top: 117px;
+
+    left: 1px;
+
+    transform:
+        rotate(-35deg);
+
+}
+
+
+/* action hand */
+
+.robot-arm-action
+.robot-hand {
+
+    top: 119px;
+
+    left: 40px;
+
+    transform:
+        rotate(20deg);
+
+}
+
+
+.robot-hand span {
+
+    position: absolute;
+
+    width: 6px;
+    height: 15px;
+
+    border-radius: 5px;
+
+    background: #d7e3ed;
+
+}
+
+
+.robot-hand span:nth-child(1) {
+    left: 2px;
+}
+
+.robot-hand span:nth-child(2) {
+    left: 9px;
+}
+
+.robot-hand span:nth-child(3) {
+    left: 16px;
+}
+
+
+/* =========================================================
+   SITTING LEGS
+   ========================================================= */
+
+.robot-leg {
+
+    position: absolute;
+
+    top: 100px;
+
+    width: 90px;
+
+    height: 140px;
+
+}
+
+
+/* LEFT LEG BENT */
+
+.robot-leg-left {
+
+    left: -5px;
+
+    transform:
+        rotate(18deg);
+
+}
+
+
+.robot-leg-right {
+
+    right: -8px;
+
+    transform:
+        rotate(-35deg);
+
+}
+
+
+/* THIGH */
+
+.thigh {
+
+    position: absolute;
+
+    width: 48px;
+    height: 80px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #62758a,
+            #bccbd8
+        );
+
+    border:
+        2px solid #d4e0e9;
+
+}
+
+
+/* KNEE */
+
+.knee {
+
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #607287;
+
+    border:
+        3px solid #d1dee8;
+
+    top: 62px;
+
+    left: 18px;
+
+}
+
+
+/* SHIN */
+
+.shin {
+
+    position: absolute;
+
+    width: 37px;
+    height: 65px;
+
+    top: 76px;
+
+    left: 27px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #65788d,
+            #bac9d6
+        );
+
+    border:
+        2px solid #d3dfe8;
+
+}
+
+
+/* FOOT */
+
+.robot-foot {
+
+    position: absolute;
+
+    width: 75px;
+    height: 27px;
+
+    bottom: -5px;
+
+    left: 15px;
+
+    border-radius:
+        18px 20px 12px 12px;
+
+    background:
+        #53667c;
+
+    border:
+        2px solid #bfcdda;
+
+}
+
+
+/* =========================================================
+   FLOOR
+   ========================================================= */
+
+.robot-floor {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 390px;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            transparent
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(82,229,255,.3);
+
+}
+
+
+.robot-floor span {
+
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background:
+        var(--cyan);
+
+    opacity: .5;
+
+}
+
+
+.robot-floor span:nth-child(1) {
+    left: 40px;
+}
+
+.robot-floor span:nth-child(2) {
+    left: 180px;
+}
+
+.robot-floor span:nth-child(3) {
+    right: 35px;
+}
+
+
+/* =========================================================
+   ROBOT MESSAGE
+   ========================================================= */
+
+.robot-message {
+
+    position: absolute;
+
+    right: 6%;
+
+    bottom: 38%;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #68768d;
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+}
+
+
+.message-dot {
+
+    width: 5px;
+    height: 5px;
+
+    background:
+        var(--cyan);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 10px var(--cyan);
+
+}
+
+
+/* =========================================================
+   FLOATING OBJECTS
+   ========================================================= */
+
+.floating-object {
+
+    position: absolute;
+
+    color:
+        rgba(82,229,255,.35);
+
+    font-size: 20px;
+
+    animation:
+        floatObject 5s ease-in-out infinite;
+
+}
+
+
+.object-one {
+
+    right: 40%;
+
+    top: 25%;
+
+}
+
+
+.object-two {
+
+    right: 8%;
+
+    top: 45%;
+
+    animation-delay: -2s;
+
+}
+
+
+.object-three {
+
+    left: 50%;
+
+    top: 20%;
+
+    animation-delay: -3s;
+
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+   ========================================================= */
+
+.scroll-indicator {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #59667b;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.scroll-mouse {
+
+    width: 20px;
+    height: 30px;
+
+    border:
+        1px solid #46546a;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding-top: 6px;
+
+}
+
+
+.scroll-mouse span {
+
+    width: 3px;
+    height: 6px;
+
+    border-radius: 3px;
+
+    background: var(--cyan);
+
+    animation:
+        scrollDown 1.5s infinite;
+
+}
+
+
+/* =========================================================
+   SCROLL SECTIONS
+   ========================================================= */
+
+.month-scroll-container {
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+.month-scroll-section {
+
+    height: 100vh;
+
+    position: relative;
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   ROBOT ANIMATIONS
+   ========================================================= */
+
+@keyframes robotBreath {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-5px)
+            rotate(.5deg);
+
+    }
+
+}
+
+
+@keyframes antennaPulse {
+
+    0%,
+    100% {
+        opacity: .5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes eyeBlink {
+
+    0%,
+    45%,
+    48%,
+    100% {
+
+        transform:
+            scaleY(1);
+
+    }
+
+    46%,
+    47% {
+
+        transform:
+            scaleY(.1);
+
+    }
+
+}
+
+
+@keyframes floatObject {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-15px)
+            rotate(15deg);
+
+    }
+
+}
+
+
+@keyframes scrollDown {
+
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   FINAL CELEBRATION
+   ========================================================= */
+
+.robot.celebrate {
+
+    animation:
+        robotCelebrate 1s ease-in-out infinite;
+
+}
+
+
+@keyframes robotCelebrate {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-10px)
+            rotate(-2deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .month-rail {
+
+        left: 15px;
+
+        width: 80px;
+
+    }
+
+    .rail-name {
+
+        display: none;
+
+    }
+
+    .month-information {
+
+        left: 15%;
+
+        width: 45%;
+
+    }
+
+    .month-card h1 {
+
+        font-size: 55px;
+
+        letter-spacing: -3px;
+
+    }
+
+    .challenge-word {
+
+        font-size: 15px;
+
+    }
+
+    .robot-area {
+
+        right: -80px;
+
+        transform:
+            scale(.8);
+
+        transform-origin:
+            bottom right;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .journey-nav {
+
+        padding:
+            0 20px;
+
+    }
+
+    .nav-status {
+
+        display: none;
+
+    }
+
+    .month-rail {
+
+        top: auto;
+
+        bottom: 20px;
+
+        left: 20px;
+
+        width: calc(100% - 40px);
+
+        height: 35px;
+
+        flex-direction: row;
+
+        justify-content: space-between;
+
+        overflow: hidden;
+
+    }
+
+    .rail-line {
+
+        top: 15px;
+
+        bottom: auto;
+
+        left: 0;
+
+        right: 0;
+
+        width: auto;
+
+        height: 1px;
+
+    }
+
+    .rail-progress {
+
+        left: 0;
+
+        top: 14px;
+
+        height: 3px !important;
+
+        width:
+            calc(
+                var(--journey-progress) * 100%
+            );
+
+    }
+
+    .rail-month {
+
+        height: 30px;
+
+        width: 20px;
+
+        justify-content: center;
+
+    }
+
+    .rail-number {
+
+        display: none;
+
+    }
+
+    .rail-dot {
+
+        left: 50%;
+
+        transform:
+            translateX(-50%);
+
+    }
+
+    .month-information {
+
+        left: 25px;
+
+        top: 34%;
+
+        width:
+            calc(100% - 50px);
+
+    }
+
+    .month-card h1 {
+
+        font-size: 58px;
+
+    }
+
+    .month-number {
+
+        font-size: 90px;
+
+    }
+
+    .mission-box {
+
+        width: 100%;
+
+    }
+
+    .robot-area {
+
+        right: -80px;
+
+        bottom: 5%;
+
+        transform:
+            scale(.55);
+
+        transform-origin:
+            bottom right;
+
+    }
+
+    .robot-message {
+
+        display: none;
+
+    }
+
+    .scroll-indicator {
+
+        display: none;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            .01ms !important;
+
+    }
+
+}
+/* =========================================================
+   CHALLENGE DETAIL PAGE
+   ========================================================= */
+
+.challenge-page {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 70% 50%,
+            rgba(32, 85, 255, .12),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(0, 220, 255, .07),
+            transparent 35%
+        ),
+
+        #030711;
+
+    color: #f4f8ff;
+
+}
+
+
+/* =========================================================
+   NAV
+   ========================================================= */
+
+.challenge-nav {
+
+    height: 75px;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 5vw;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+    background:
+        rgba(3,7,17,.7);
+
+    backdrop-filter:
+        blur(20px);
+
+}
+
+
+.challenge-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    line-height: 1.4;
+
+}
+
+
+.challenge-brand strong {
+
+    display: block;
+
+}
+
+
+.brand-orbit {
+
+    width: 28px;
+    height: 28px;
+
+    border:
+        1px solid #52e5ff;
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-25deg);
+
+    position: relative;
+
+}
+
+
+.brand-orbit::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        #52e5ff;
+
+    right: 3px;
+    top: 9px;
+
+    box-shadow:
+        0 0 12px #52e5ff;
+
+}
+
+
+.challenge-nav-center {
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #66748b;
+
+}
+
+
+.nav-dot {
+
+    display: inline-block;
+
+    width: 5px;
+    height: 5px;
+
+    margin-right: 8px;
+
+    border-radius: 50%;
+
+    background: #53ffb5;
+
+    box-shadow:
+        0 0 10px #53ffb5;
+
+}
+
+
+.back-link {
+
+    color: #8390a5;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    transition: .3s ease;
+
+}
+
+
+.back-link:hover {
+
+    color: #52e5ff;
+
+    transform:
+        translateX(-5px);
+
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.challenge-main {
+
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        48% 52%;
+
+    align-items: center;
+
+    padding:
+        80px 8vw 50px;
+
+    position: relative;
+
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+   ========================================================= */
+
+.challenge-page::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .18;
+
+    background-image:
+
+        linear-gradient(
+            rgba(82,229,255,.07) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(82,229,255,.07) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        70px 70px;
+
+    mask-image:
+        radial-gradient(
+            ellipse at center,
+            black,
+            transparent 80%
+        );
+
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.challenge-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    max-width: 600px;
+
+}
+
+
+.destination-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #52e5ff;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.destination-line {
+
+    width: 35px;
+    height: 1px;
+
+    background:
+        #52e5ff;
+
+    box-shadow:
+        0 0 10px #52e5ff;
+
+}
+
+
+.challenge-number {
+
+    color: #4c5a70;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.challenge-year {
+
+    margin-top: 8px;
+
+    color: #67758b;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.challenge-title-area {
+
+    margin-top: 55px;
+
+}
+
+
+.month-index {
+
+    color: #4d5d74;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.challenge-title-area h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(60px, 8vw, 105px);
+
+    line-height: .85;
+
+    letter-spacing: -5px;
+
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            135deg,
+            white,
+            #71829b
+        );
+
+    color: transparent;
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+}
+
+
+.challenge-title {
+
+    margin-top: 15px;
+
+    color: #52e5ff;
+
+    font-size: 20px;
+
+    letter-spacing: 8px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   MISSION
+   ========================================================= */
+
+.mission-panel {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 45px;
+
+    width: 430px;
+
+    padding: 18px 20px;
+
+    border-left:
+        2px solid #52e5ff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(82,229,255,.08),
+            transparent
+        );
+
+}
+
+
+.mission-icon {
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid rgba(82,229,255,.35);
+
+    border-radius: 50%;
+
+    color: #52e5ff;
+
+}
+
+
+.mission-label {
+
+    display: block;
+
+    color: #718096;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.mission-panel p {
+
+    margin: 7px 0 0;
+
+    color: #cbd4e1;
+
+    font-size: 14px;
+
+}
+
+
+.mission-panel.unavailable {
+
+    border-color:
+        #ff657a;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,75,100,.08),
+            transparent
+        );
+
+}
+
+
+.unavailable .mission-icon {
+
+    color: #ff657a;
+
+    border-color:
+        rgba(255,101,122,.4);
+
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.challenge-action {
+
+    margin-top: 30px;
+
+}
+
+
+.return-button {
+
+    display: inline-flex;
+
+    padding: 13px 20px;
+
+    border:
+        1px solid rgba(82,229,255,.3);
+
+    color: #dce7f4;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    background:
+        rgba(82,229,255,.03);
+
+    transition:
+        .35s ease;
+
+}
+
+
+.return-button:hover {
+
+    color: white;
+
+    border-color:
+        #52e5ff;
+
+    background:
+        rgba(82,229,255,.1);
+
+    transform:
+        translateX(6px);
+
+}
+
+
+/* =========================================================
+   ROBOT AREA
+   ========================================================= */
+
+.challenge-robot-area {
+
+    height: 600px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+/* =========================================================
+   ROBOT STATUS
+   ========================================================= */
+
+.robot-status {
+
+    position: absolute;
+
+    right: 10%;
+
+    top: 10%;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #6c7b91;
+
+}
+
+
+.status-indicator {
+
+    display: inline-block;
+
+    width: 5px;
+    height: 5px;
+
+    margin-right: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #52e5ff;
+
+    box-shadow:
+        0 0 10px #52e5ff;
+
+}
+
+
+/* =========================================================
+   ROBOT SYSTEM
+   ========================================================= */
+
+.robot-system-text {
+
+    position: absolute;
+
+    left: 10%;
+
+    top: 25%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    color: #526076;
+
+}
+
+
+.robot-system-text strong {
+
+    color: #52e5ff;
+
+}
+
+
+/* =========================================================
+   ROBOT
+   ========================================================= */
+
+.challenge-robot {
+
+    width: 330px;
+    height: 400px;
+
+    position: relative;
+
+    margin-top: 80px;
+
+    animation:
+        challengeRobotFloat 4s
+        ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 30px 35px
+            rgba(0,0,0,.6)
+        );
+
+}
+
+
+/* =========================================================
+   ANTENNA
+   ========================================================= */
+
+.c-antenna {
+
+    position: absolute;
+
+    width: 3px;
+    height: 35px;
+
+    top: -28px;
+    left: 162px;
+
+    background:
+        #60748b;
+
+}
+
+
+.c-antenna span {
+
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
+    top: -5px;
+    left: -3px;
+
+    border-radius: 50%;
+
+    background:
+        #52e5ff;
+
+    box-shadow:
+        0 0 20px #52e5ff;
+
+}
+
+
+/* =========================================================
+   HEAD
+   ========================================================= */
+
+.c-head {
+
+    position: absolute;
+
+    width: 160px;
+    height: 120px;
+
+    left: 85px;
+    top: 5px;
+
+    border:
+        3px solid #dbe7f1;
+
+    border-radius:
+        35px 35px 45px 45px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d2dce5,
+            #607287
+        );
+
+    box-shadow:
+        inset 0 -15px 20px
+        rgba(0,0,0,.25);
+
+}
+
+
+.c-ear {
+
+    position: absolute;
+
+    top: 35px;
+
+    width: 15px;
+    height: 42px;
+
+    border-radius: 8px;
+
+    background:
+        #52657a;
+
+}
+
+
+.c-ear.left {
+    left: -13px;
+}
+
+
+.c-ear.right {
+    right: -13px;
+}
+
+
+.c-face {
+
+    position: absolute;
+
+    inset: 17px;
+
+    border-radius: 25px;
+
+    background:
+        #07111c;
+
+    border:
+        1px solid #46576c;
+
+}
+
+
+.c-eyes {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    margin-top: 25px;
+
+}
+
+
+.c-eyes span {
+
+    width: 18px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    background:
+        #52e5ff;
+
+    box-shadow:
+        0 0 15px #52e5ff;
+
+}
+
+
+.c-mouth {
+
+    width: 30px;
+    height: 4px;
+
+    position: absolute;
+
+    bottom: 20px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 5px;
+
+    background:
+        #536b82;
+
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.c-body {
+
+    position: absolute;
+
+    width: 180px;
+    height: 240px;
+
+    left: 75px;
+    top: 125px;
+
+}
+
+
+.c-core {
+
+    position: absolute;
+
+    width: 120px;
+    height: 135px;
+
+    left: 30px;
+
+    border-radius:
+        30px 30px 25px 25px;
+
+    border:
+        3px solid #d7e3ec;
+
+    background:
+        linear-gradient(
+            145deg,
+            #becbd7,
+            #5c6f84
+        );
+
+}
+
+
+.c-core::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    left: 36px;
+    top: 30px;
+
+    border-radius: 50%;
+
+    border:
+        3px solid #52e5ff;
+
+    box-shadow:
+        0 0 20px
+        rgba(82,229,255,.4);
+
+}
+
+
+.c-core span {
+
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+
+    left: 51px;
+    top: 45px;
+
+    border-radius: 50%;
+
+    background:
+        #52e5ff;
+
+    box-shadow:
+        0 0 20px #52e5ff;
+
+}
+
+
+/* =========================================================
+   ARMS
+   ========================================================= */
+
+.c-arm {
+
+    position: absolute;
+
+    width: 90px;
+    height: 160px;
+
+}
+
+
+/* HAND AT MOUTH */
+
+.c-thinking {
+
+    left: -45px;
+    top: -5px;
+
+    transform:
+        rotate(25deg);
+
+}
+
+
+/* OTHER HAND */
+
+.c-other {
+
+    right: -60px;
+    top: 15px;
+
+    transform:
+        rotate(-35deg);
+
+}
+
+
+.c-upper {
+
+    width: 28px;
+    height: 65px;
+
+    position: absolute;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #61758b,
+            #c7d4df
+        );
+
+    border:
+        2px solid #d8e3ec;
+
+}
+
+
+.c-joint {
+
+    width: 30px;
+    height: 30px;
+
+    position: absolute;
+
+    top: 55px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    background:
+        #506379;
+
+    border:
+        3px solid #cbd9e4;
+
+}
+
+
+.c-forearm {
+
+    width: 24px;
+    height: 65px;
+
+    position: absolute;
+
+    top: 70px;
+    left: 9px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #60748a,
+            #c4d2de
+        );
+
+}
+
+
+/* HAND */
+
+.c-hand {
+
+    position: absolute;
+
+    width: 28px;
+    height: 30px;
+
+    border-radius:
+        10px 10px 13px 13px;
+
+    background:
+        #d2dee8;
+
+}
+
+
+.c-thinking .c-hand {
+
+    left: 0;
+    top: 122px;
+
+    transform:
+        rotate(-35deg);
+
+}
+
+
+.c-other .c-hand {
+
+    left: 42px;
+    top: 120px;
+
+    transform:
+        rotate(20deg);
+
+}
+
+
+.c-hand i {
+
+    position: absolute;
+
+    width: 6px;
+    height: 15px;
+
+    border-radius: 5px;
+
+    background:
+        #dbe6ef;
+
+}
+
+
+.c-hand i:nth-child(1) {
+    left: 2px;
+}
+
+.c-hand i:nth-child(2) {
+    left: 10px;
+}
+
+.c-hand i:nth-child(3) {
+    left: 18px;
+}
+
+
+/* =========================================================
+   SITTING LEGS
+   ========================================================= */
+
+.c-leg {
+
+    position: absolute;
+
+    top: 110px;
+
+    width: 95px;
+    height: 150px;
+
+}
+
+
+.c-leg-left {
+
+    left: -5px;
+
+    transform:
+        rotate(20deg);
+
+}
+
+
+.c-leg-right {
+
+    right: -10px;
+
+    transform:
+        rotate(-35deg);
+
+}
+
+
+.c-leg div {
+
+    width: 50px;
+    height: 85px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #607389,
+            #c4d2dd
+        );
+
+    border:
+        2px solid #d6e2eb;
+
+}
+
+
+.c-leg span {
+
+    position: absolute;
+
+    width: 72px;
+    height: 28px;
+
+    left: 25px;
+    bottom: 0;
+
+    border-radius:
+        20px 20px 12px 12px;
+
+    background:
+        #52657b;
+
+    border:
+        2px solid #becbd7;
+
+}
+
+
+/* =========================================================
+   GROUND
+   ========================================================= */
+
+.robot-ground {
+
+    position: absolute;
+
+    width: 440px;
+    height: 4px;
+
+    bottom: 70px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #52e5ff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(82,229,255,.35);
+
+}
+
+
+.robot-ground::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 250px;
+    height: 50px;
+
+    bottom: -20px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,.7);
+
+    filter:
+        blur(12px);
+
+}
+
+
+/* =========================================================
+   CONSOLE
+   ========================================================= */
+
+.robot-console {
+
+    position: absolute;
+
+    right: 8%;
+
+    bottom: 15%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #617087;
+
+}
+
+
+.robot-console span {
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background:
+        #52e5ff;
+
+    box-shadow:
+        0 0 10px #52e5ff;
+
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.challenge-footer {
+
+    position: absolute;
+
+    left: 8vw;
+    right: 8vw;
+
+    bottom: 30px;
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #56647a;
+
+}
+
+
+.challenge-footer > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.footer-line {
+
+    width: 25px;
+    height: 1px;
+
+    background:
+        #52e5ff;
+
+}
+
+
+.challenge-footer a {
+
+    color: #52e5ff;
+
+    text-decoration: none;
+
+    transition: .3s ease;
+
+}
+
+
+.challenge-footer a:hover {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* =========================================================
+   ROBOT FLOAT
+   ========================================================= */
+
+@keyframes challengeRobotFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-7px);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .challenge-main {
+
+        grid-template-columns:
+            1fr;
+
+        padding:
+            110px 30px 40px;
+
+    }
+
+
+    .challenge-robot-area {
+
+        position: absolute;
+
+        right: -90px;
+
+        bottom: -40px;
+
+        transform:
+            scale(.65);
+
+        transform-origin:
+            bottom right;
+
+        opacity: .7;
+
+    }
+
+
+    .challenge-content {
+
+        z-index: 10;
+
+    }
+
+
+    .mission-panel {
+
+        width:
+            min(430px, 90vw);
+
+    }
+
+
+    .challenge-footer {
+
+        left: 30px;
+        right: 30px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .challenge-nav-center {
+
+        display: none;
+
+    }
+
+
+    .back-link {
+
+        font-size: 8px;
+
+    }
+
+
+    .challenge-main {
+
+        padding:
+            105px 25px 40px;
+
+    }
+
+
+    .challenge-title-area {
+
+        margin-top: 35px;
+
+    }
+
+
+    .challenge-title-area h1 {
+
+        font-size: 62px;
+
+    }
+
+
+    .challenge-title {
+
+        font-size: 15px;
+
+        letter-spacing: 5px;
+
+    }
+
+
+    .mission-panel {
+
+        margin-top: 30px;
+
+    }
+
+
+    .challenge-footer {
+
+        display: none;
+
+    }
+
+}

@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>User Profile</title>
+  </head>
+  <body>
+    <h1>User Profile</h1>
+    <ul>
+      <li>
+        {% for profile in profiles %}
+        <strong>Image:</strong>
+        <img src="{{ profile.user_image.url}}" />
+        {% endfor %}
+      </li>
+    </ul>
+  </body>
+</html>

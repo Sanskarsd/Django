@@ -1,0 +1,24 @@
+<!DOCTYPEhTMl>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review List</title>
+
+    
+</head>
+<body>  
+    
+    <ul>
+        {% for review in reviews %}
+
+        <li>
+            <a href="{% url 'review_detail' review.id %}">
+            {{ review.username }} - ( Rating: {{ review.ratings }} )
+            </a>
+        </li>
+
+        {% endfor %}
+</body>
+</html>
