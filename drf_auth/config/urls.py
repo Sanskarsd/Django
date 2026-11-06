@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("basicauth/", include("basicauth.urls")),
     path("sessionauth/", include("sessionauth.urls")),
+    path("tokenauth/", include("tokenauth.urls")),
 ]
