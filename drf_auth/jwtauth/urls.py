@@ -17,5 +17,5 @@ urlpatterns = [
     path("refresh/", TokenRefreshView.as_view()),
     path("verify/", TokenVerifyView.as_view()),
     path("", include(router.urls)),
-    path("logout/", TokenBlacklistView.as_view(), name="token_blacklist"),
+    path("logout/", TokenBlacklistView.as_view(), name="token_blacklists"),
 ]
